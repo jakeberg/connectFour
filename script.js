@@ -21,47 +21,76 @@ for (let i = 0; i < numCols; i++) {
     destination.appendChild(column);
 }
 
+// Fixes id so it can be used in function
+function prepareId(p) {
+    let noDash = p.split("-");
+    let removeLetters = noDash.pop();
+    return removeLetters;
+}
 
-// function selection(event) {
-//     let cell = event.target;
-//     console.log(cell);
-//     let idNumber = cell.id;
-//     console.log(idNumber);
-//     let id = prepareId(idNumber);
-//     console.log(id)
-// }
-
-// function prepareId(p) {
-//     let noDash = p.split("-");
-//     console.log(noDash);
-//     let removeLetters = noDash.pop();
-//     return removeLetters;
-
-// }
-
-
-
-// Click event for choices.
-var columns = document.querySelectorAll(".column");
 
 const getToken = function (event) {
     let destination = this;
+    let idNum = prepareId(destination.id);
 
     if (clickCount % 2) {
         var redDisc = document.createElement("div");
         redDisc.className = ("red");
         destination.appendChild(redDisc);
+        gameArray[idNum].shift();
+        gameArray[idNum].push(1);
+
     } else {
         var blackDisc = document.createElement("div");
         blackDisc.className = ("black");
         destination.appendChild(blackDisc);
+        gameArray[idNum].shift();
+        gameArray[idNum].push(2);
     }
     clickCount++
-    console.log(clickCount);
 }
+
+
+// This checks vertically in the game and horizontally in the array
+const checkWinVertical = function () {
+    for (let y = 0; y < gameArray.length; y++) {
+        let row = gameArray[y];
+
+        for (let x = 0; x < row.length; x++) {
+            let cell = row[x];
+            if (cell !== 0) {
+                if (cell === gameArray[y][x + 1] && cell === gameArray[y][x + 2] && cell === gameArray[y][x + 3]) {
+                    alert('current player wins!');
+                }
+            }
+        }
+    }
+}
+
+// This checks horizontally in the game and vertically in the array
+const checkWinHorizontal = function () {
+    for (let y = 0; y < gameArray.length; y++) {
+        let row = gameArray[y];
+
+        for (let x = 0; x < row.length; x++) {
+            let cell = gameArray[y][x];
+
+            if (cell !== 0) {
+                if (cell === gameArray[y + 1][x] && cell === gameArray[y + 2][x] && cell === gameArray[y + 3][x]) {
+                    alert('current player wins!');
+                }
+            }
+        }
+    }
+}
+
+
+// Click event for choices.
+var columns = document.querySelectorAll(".column");
 
 for (let i = 0; i < columns.length; i++) {
     let column = columns[i];
-    // column.onclick = getToken;
     column.addEventListener('click', getToken);
+    // column.addEventListener('click', checkWinVertical);
+    column.addEventListener('click', checkWinHorizontal);
 }
