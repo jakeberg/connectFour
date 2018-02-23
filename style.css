@@ -21,24 +21,24 @@ body {
 }
 
 .rows {
-    width: 46px;
-    height: 46px;
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
     border: 2px solid black;
 }
 
 .red {
     background-color: red;
-    width: 46px;
-    height: 46px;
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
     border: 2px solid black;
 }
 
 .black {
     background-color: black;
-    width: 46px;
-    height: 46px;
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
     border: 2px solid black;
 }

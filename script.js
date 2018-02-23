@@ -1,6 +1,7 @@
 const numCols = 6;
 const destination = document.getElementById("board");
-let col1 = 0;
+
+const numIndex = 6;
 
 let clickCount = 0;
 
@@ -29,7 +30,7 @@ function prepareId(p) {
 }
 
 
-const getToken = function (event) {
+const placeChip = function (event) {
     let destination = this;
     let idNum = prepareId(destination.id);
 
@@ -37,19 +38,19 @@ const getToken = function (event) {
         var redDisc = document.createElement("div");
         redDisc.className = ("red");
         destination.appendChild(redDisc);
-        gameArray[idNum].shift();
-        gameArray[idNum].push(1);
+        gameArray[idNum][0] = 1;
 
     } else {
         var blackDisc = document.createElement("div");
         blackDisc.className = ("black");
         destination.appendChild(blackDisc);
-        gameArray[idNum].shift();
-        gameArray[idNum].push(2);
+        gameArray[idNum][0] = 2;
+
     }
+    console.log(gameArray)
     clickCount++
 }
-
+console.log(destination)
 
 // This checks vertically in the game and horizontally in the array
 const checkWinVertical = function () {
@@ -84,13 +85,12 @@ const checkWinHorizontal = function () {
     }
 }
 
-
 // Click event for choices.
 var columns = document.querySelectorAll(".column");
 
 for (let i = 0; i < columns.length; i++) {
     let column = columns[i];
-    column.addEventListener('click', getToken);
-    // column.addEventListener('click', checkWinVertical);
+    column.addEventListener('click', placeChip);
+    column.addEventListener('click', checkWinVertical);
     column.addEventListener('click', checkWinHorizontal);
 }
