@@ -1,0 +1,44 @@
+body {
+    display: flex;
+    justify-content: space-around;
+}
+
+
+#board {
+    display: flex;
+    flex-direction: row;
+}
+
+
+.column {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: flex-start;
+    width: 50px;
+    height: 300px;
+    margin: 10px;
+    border: 2px solid black;
+}
+
+.rows {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    border: 2px solid black;
+}
+
+.red {
+    background-color: red;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    border: 2px solid black;
+}
+
+.black {
+    background-color: black;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    border: 2px solid black;
+}
