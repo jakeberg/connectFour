@@ -1,7 +1,6 @@
 function connectFour(){
 
 const destination = document.getElementById("board");
-
 let clickCount = 0;
 
 const gameArray = [
@@ -37,12 +36,12 @@ const placeChip = function () {
     let x = document.getElementById("col-" + idNum).childElementCount;
     let y = 6;
 
-    if (clickCount % 2) {
+    if (clickCount % 2 && x < y + 1) {
         let redDisc = document.createElement("div");
         redDisc.className = ("red");
         thisCol.appendChild(redDisc);
         gameArray[idNum][y - x] = 1;
-    } else {
+    } else if (x < y + 1) {
         let blackDisc = document.createElement("div");
         blackDisc.className = ("black");
         thisCol.appendChild(blackDisc);
