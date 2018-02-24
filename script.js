@@ -4,12 +4,13 @@ const destination = document.getElementById("board");
 let clickCount = 0;
 
 const gameArray = [
-    [0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0]
+    [0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0]
 ]
 
 //Creates game board
@@ -34,7 +35,7 @@ const placeChip = function () {
     let idNum = prepareId(thisCol.id);
 
     let x = document.getElementById("col-" + idNum).childElementCount;
-    let y = 6;
+    let y = 5;
 
     if (clickCount % 2 && x < y + 1) {
         let redDisc = document.createElement("div");

@@ -22,7 +22,7 @@ main {
     flex-direction: column-reverse;
     justify-content: flex-start;
     width: 50px;
-    height: 350px;
+    height: 300px;
     margin: 10px;
     border: 2px solid black;
 }
