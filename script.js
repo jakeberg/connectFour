@@ -1,7 +1,5 @@
-const numCols = 6;
 const destination = document.getElementById("board");
-
-const numIndex = 6;
+const rowId = 6;
 
 let clickCount = 0;
 
@@ -15,7 +13,7 @@ const gameArray = [
 ]
 
 //Creates game board based on number of cols and rows defined above
-for (let i = 0; i < numCols; i++) {
+for (let i = 0; i < gameArray.length; i++) {
     const column = document.createElement("div");
     column.classList.add('column');
     column.id = 'col-' + (String(i));
@@ -34,23 +32,22 @@ const placeChip = function (event) {
     let destination = this;
     let idNum = prepareId(destination.id);
 
+    let x = document.getElementById("col-" + idNum).childElementCount;
+    let y = 6;
+
     if (clickCount % 2) {
         var redDisc = document.createElement("div");
         redDisc.className = ("red");
         destination.appendChild(redDisc);
-        gameArray[idNum][0] = 1;
-
+        gameArray[idNum][y - x] = 1;
     } else {
         var blackDisc = document.createElement("div");
         blackDisc.className = ("black");
         destination.appendChild(blackDisc);
-        gameArray[idNum][0] = 2;
-
+        gameArray[idNum][y - x] = 2;
     }
-    console.log(gameArray)
     clickCount++
 }
-console.log(destination)
 
 // This checks vertically in the game and horizontally in the array
 const checkWinVertical = function () {
