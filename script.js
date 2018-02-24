@@ -1,5 +1,4 @@
 const destination = document.getElementById("board");
-const rowId = 6;
 
 let clickCount = 0;
 
@@ -20,14 +19,14 @@ for (let i = 0; i < gameArray.length; i++) {
     destination.appendChild(column);
 }
 
-// Fixes id so it can be used in function
+// Fixes column id so it can be used in function
 function prepareId(p) {
     let noDash = p.split("-");
     let removeLetters = noDash.pop();
     return removeLetters;
 }
 
-
+// Adds a black or red div on the game board
 const placeChip = function (event) {
     let destination = this;
     let idNum = prepareId(destination.id);
@@ -82,6 +81,46 @@ const checkWinHorizontal = function () {
     }
 }
 
+// Checks down and to the right for diagonal win
+const checkWinDiagonalRight = function () {
+for(let y = 0; y < gameArray.length; y++){
+    let row = gameArray[y];
+    // iterate each cell in the row
+    for(let x = 0; x < row.length; x++) {
+      cell = gameArray[y][x];
+      
+      // Only check if cell is filled
+      if(cell !== 0) {
+        
+        // Check the next two cells for the same value
+        if(cell === gameArray[y+1][x+1] && cell === gameArray[y+2][x+2] && cell === gameArray[y+3][x+3]  ) {
+            alert('current player wins!');
+        }
+      }
+    }
+  }
+}
+// Checks down and to the left for diagonal win
+const checkWinDiagonalLeft = function () {
+    for(let y = 0; y < gameArray.length; y++){
+        let row = gameArray[y];
+        // iterate each cell in the row
+        for(let x = 0; x < row.length; x++) {
+          cell = gameArray[y][x];
+          
+          // Only check if cell is filled
+          if(cell !== 0) {
+            
+            // Check the next two cells for the same value
+            if(cell === gameArray[y-1][x+1] && cell === gameArray[y-2][x+2] && cell === gameArray[y-3][x+3]  ) {
+                alert('current player wins!');
+            }
+          }
+        }
+      }
+    }
+console.log(gameArray)
+
 // Click event for choices.
 var columns = document.querySelectorAll(".column");
 
@@ -90,4 +129,6 @@ for (let i = 0; i < columns.length; i++) {
     column.addEventListener('click', placeChip);
     column.addEventListener('click', checkWinVertical);
     column.addEventListener('click', checkWinHorizontal);
+    column.addEventListener('click', checkWinDiagonalRight);
+    column.addEventListener('click', checkWinDiagonalLeft);
 }
