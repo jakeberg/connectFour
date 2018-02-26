@@ -2,6 +2,7 @@ function connectFour() {
 
     const destination = document.getElementById("board");
     let clickCount = 0;
+    var currentPlayer = "";
 
     const gameArray = [
         [0, 0, 0, 0, 0, 0],
@@ -42,14 +43,15 @@ function connectFour() {
             redDisc.className = ("red");
             thisCol.appendChild(redDisc);
             gameArray[idNum][y + x] = 1;
+            currentPlayer = "Red";
         } else if (x < 6) {
             let blackDisc = document.createElement("div");
             blackDisc.className = ("black");
             thisCol.appendChild(blackDisc);
             gameArray[idNum][y + x] = 2;
+            currentPlayer = "Black";
         }
         clickCount++
-        console.log(gameArray)
     }
 
     // This checks vertically in the game and horizontally in the array
@@ -61,8 +63,7 @@ function connectFour() {
                 let cell = row[x];
                 if (cell !== 0) {
                     if (cell === gameArray[y][x + 1] && cell === gameArray[y][x + 2] && cell === gameArray[y][x + 3]) {
-                        return true;
-                        alert('You win vertically!');
+                        alert(currentPlayer + ' wins vertically!');
                         reset();
                         connectFour();
                     }
@@ -91,7 +92,7 @@ function connectFour() {
 
                 if (cell !== 0) {
                     if (cell === gameArray[y + 1][x] && cell === gameArray[y + 2][x] && cell === gameArray[y + 3][x]) {
-                        alert('You win horizontal!');
+                        alert(currentPlayer +' wins horizontally!');
                         reset();
                         connectFour();
                     }
@@ -113,7 +114,7 @@ function connectFour() {
 
                     // Check the next two cells for the same value
                     if (cell === gameArray[y + 1][x - 1] && cell === gameArray[y + 2][x - 2] && cell === gameArray[y + 3][x - 3]) {
-                        alert('You win down right!');
+                        alert(currentPlayer + ' wins down and to the right!');
                         reset();
                         connectFour();
                     }
@@ -121,6 +122,7 @@ function connectFour() {
             }
         }
     }
+
     // Checks down and to the left for diagonal win
     const checkWinDiagonalLeft = function () {
         for (let y = 0; y < gameArray.length; y++) {
@@ -134,7 +136,7 @@ function connectFour() {
 
                     // Check the next two cells for the same value
                     if (cell === gameArray[y + 1][x + 1] && cell === gameArray[y + 2][x + 2] && cell === gameArray[y + 3][x + 3]) {
-                        alert('You Win down left!');
+                        alert(currentPlayer + ' wins down and to the left!');
                         reset();
                         connectFour();
                     }
@@ -149,6 +151,7 @@ function connectFour() {
             myNode.removeChild(myNode.firstChild);
         }
     }
+
 
 
     // Click event for choices.
