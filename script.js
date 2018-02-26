@@ -70,7 +70,15 @@ function connectFour() {
             }
         }
     }
-
+    // // Test for vertical win
+    // function testcheckWinVertical() {
+    //     let result = checkWinVertical();
+    //     console.assert(result === true, {
+    //         "expected": true,
+    //         "result": result
+    //     });
+    // }
+    // testcheckWinVertical()
 
 
     // This checks horizontally in the game and vertically in the array
@@ -104,7 +112,7 @@ function connectFour() {
                 if (cell !== 0) {
 
                     // Check the next two cells for the same value
-                    if (cell === gameArray[y - 1][x + 1] && cell === gameArray[y - 2][x + 2] && cell === gameArray[y - 3][x + 3]) {
+                    if (cell === gameArray[y + 1][x - 1] && cell === gameArray[y + 2][x - 2] && cell === gameArray[y + 3][x - 3]) {
                         alert('You win down right!');
                         reset();
                         connectFour();
