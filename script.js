@@ -35,8 +35,8 @@ function connectFour() {
         let thisCol = this;
         let idNum = prepareId(thisCol.id);
 
-        let x = document.getElementById("col-" + idNum).childElementCount;
         let y = 0;
+        let x = document.getElementById("col-" + idNum).childElementCount;
 
         if (clickCount % 2 && x < 6) {
             let redDisc = document.createElement("div");
@@ -52,6 +52,7 @@ function connectFour() {
             currentPlayer = "Black";
         }
         clickCount++
+        // console.log(gameArray);
     }
 
     // This checks vertically in the game and horizontally in the array
@@ -71,6 +72,7 @@ function connectFour() {
             }
         }
     }
+
     // // Test for vertical win
     // function testcheckWinVertical() {
     //     let result = checkWinVertical();
@@ -90,9 +92,10 @@ function connectFour() {
             for (let x = 0; x < row.length; x++) {
                 let cell = gameArray[y][x];
 
-                if (cell !== 0) {
+                if (cell !== 0 && y < gameArray.length - 3  ) {
                     if (cell === gameArray[y + 1][x] && cell === gameArray[y + 2][x] && cell === gameArray[y + 3][x]) {
-                        alert(currentPlayer +' wins horizontally!');
+                        // alert(currentPlayer + ' wins horizontally!');
+                        alert(currentPlayer + ' wins horizontally!');
                         reset();
                         connectFour();
                     }
@@ -108,10 +111,8 @@ function connectFour() {
             // iterate each cell in the row
             for (let x = 0; x < row.length; x++) {
                 cell = gameArray[y][x];
-
                 // Only check if cell is filled
-                if (cell !== 0) {
-
+                if (cell !== 0 && x < x - 3 && x < gameArray.length - 3) {
                     // Check the next two cells for the same value
                     if (cell === gameArray[y + 1][x - 1] && cell === gameArray[y + 2][x - 2] && cell === gameArray[y + 3][x - 3]) {
                         alert(currentPlayer + ' wins down and to the right!');
@@ -132,7 +133,7 @@ function connectFour() {
                 cell = gameArray[y][x];
 
                 // Only check if cell is filled
-                if (cell !== 0) {
+                if (cell !== 0 && x < x - 3) {
 
                     // Check the next two cells for the same value
                     if (cell === gameArray[y + 1][x + 1] && cell === gameArray[y + 2][x + 2] && cell === gameArray[y + 3][x + 3]) {
