@@ -5,13 +5,13 @@ function connectFour() {
     var currentPlayer = "";
 
     const gameArray = [
-        [0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0]
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        []
     ]
 
     //Creates game board
@@ -31,28 +31,32 @@ function connectFour() {
     }
 
     // Adds a black or red div on the game board
-    const placeChip = function () {
-        let thisCol = this;
+    const placeChip = function (event) {
+        let thisCol = event.currentTarget;
+
         let idNum = prepareId(thisCol.id);
 
         let y = 0;
-        let x = document.getElementById("col-" + idNum).childElementCount;
+        let x = document.getElementById(thisCol.id).childElementCount;
+
+        let disc = document.createElement("div");
 
         if (clickCount % 2 && x < 6) {
-            let redDisc = document.createElement("div");
-            redDisc.className = ("red");
-            thisCol.appendChild(redDisc);
+            // let redDisc = document.createElement("div");
+            disc.className = ("red");
+            // thisCol.appendChild(redDisc);
             gameArray[idNum][y + x] = 1;
             currentPlayer = "Red";
         } else if (x < 6) {
-            let blackDisc = document.createElement("div");
-            blackDisc.className = ("black");
-            thisCol.appendChild(blackDisc);
+            // let blackDisc = document.createElement("div");
+            disc.className = ("black");
+            // thisCol.appendChild(blackDisc);
             gameArray[idNum][y + x] = 2;
             currentPlayer = "Black";
         }
         clickCount++
-        // console.log(gameArray);
+        thisCol.appendChild(disc);
+        console.log(gameArray);
     }
 
     // This checks vertically in the game and horizontally in the array
@@ -73,17 +77,6 @@ function connectFour() {
         }
     }
 
-    // // Test for vertical win
-    // function testcheckWinVertical() {
-    //     let result = checkWinVertical();
-    //     console.assert(result === true, {
-    //         "expected": true,
-    //         "result": result
-    //     });
-    // }
-    // testcheckWinVertical()
-
-
     // This checks horizontally in the game and vertically in the array
     const checkWinHorizontal = function () {
         for (let y = 0; y < gameArray.length; y++) {
@@ -92,7 +85,7 @@ function connectFour() {
             for (let x = 0; x < row.length; x++) {
                 let cell = gameArray[y][x];
 
-                if (cell !== 0 && y < gameArray.length - 3  ) {
+                if (cell !== 0 && y < gameArray.length - 3) {
                     if (cell === gameArray[y + 1][x] && cell === gameArray[y + 2][x] && cell === gameArray[y + 3][x]) {
                         // alert(currentPlayer + ' wins horizontally!');
                         alert(currentPlayer + ' wins horizontally!');
@@ -106,7 +99,7 @@ function connectFour() {
 
     // Checks down and to the right for diagonal win
     const checkWinDiagonalRight = function () {
-        for (let y = 0; y < gameArray.length; y++) {
+        for (let y = 0; y < gameArray.length - 3; y++) {
             let row = gameArray[y];
             // iterate each cell in the row
             for (let x = 0; x < row.length; x++) {
@@ -126,7 +119,7 @@ function connectFour() {
 
     // Checks down and to the left for diagonal win
     const checkWinDiagonalLeft = function () {
-        for (let y = 0; y < gameArray.length; y++) {
+        for (let y = 0; y < gameArray.length - 3; y++) {
             let row = gameArray[y];
             // iterate each cell in the row
             for (let x = 0; x < row.length; x++) {
@@ -147,13 +140,10 @@ function connectFour() {
     }
 
     function reset() {
-        let myNode = document.getElementById("board");
-        while (myNode.firstChild) {
-            myNode.removeChild(myNode.firstChild);
+        while (destination.firstChild) {
+            destination.removeChild(destination.firstChild);
         }
     }
-
-
 
     // Click event for choices.
     var columns = document.querySelectorAll(".column");
