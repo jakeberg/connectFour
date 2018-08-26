@@ -42,15 +42,11 @@ function connectFour() {
         let disc = document.createElement("div");
 
         if (clickCount % 2 && x < 6) {
-            // let redDisc = document.createElement("div");
             disc.className = ("red");
-            // thisCol.appendChild(redDisc);
             gameArray[idNum][y + x] = 1;
             currentPlayer = "Red";
         } else if (x < 6) {
-            // let blackDisc = document.createElement("div");
             disc.className = ("black");
-            // thisCol.appendChild(blackDisc);
             gameArray[idNum][y + x] = 2;
             currentPlayer = "Black";
         }
@@ -87,7 +83,6 @@ function connectFour() {
 
                 if (cell !== 0 && y < gameArray.length - 3) {
                     if (cell === gameArray[y + 1][x] && cell === gameArray[y + 2][x] && cell === gameArray[y + 3][x]) {
-                        // alert(currentPlayer + ' wins horizontally!');
                         alert(currentPlayer + ' wins horizontally!');
                         reset();
                         connectFour();
@@ -139,6 +134,7 @@ function connectFour() {
         }
     }
 
+    // Removes all divs to reset game
     function reset() {
         while (destination.firstChild) {
             destination.removeChild(destination.firstChild);
